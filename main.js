@@ -5,26 +5,39 @@ let list = document.querySelector('#list')
 let html = document.querySelector('html')
 let modal   
 let changeNameBTN = document.querySelector('#changeName')
+let logoutBtn = document.querySelector('#logout')
 
-//  Name Changer
+//  Name Changer and actions with Local storage
 changeNameBTN.addEventListener('click', changeName)
+logoutBtn.addEventListener('click', clearLocalStor)
+
+
+
 function changeName(){
     let newName = prompt('Введите имя')
+    if(newName){
     user.innerHTML = `Hello, ${newName}`
     localStorage.setItem('name', newName)
+    } else {
+        alert("You don't write name")
+    }
+
 }
 
 function localStor(){
     let userName = localStorage.getItem('name')
     if(userName){
         user.innerHTML = `Hello, ${userName}`
+    } else {
+        user.innerHTML = "Hello, <span id='nameInput'>write your name</span>"
     }
 }
 
-localStor()
+localStor() // Check for name in local storage
 
 function clearLocalStor(){
     localStorage.clear()
+    localStor()
 }
 
 
