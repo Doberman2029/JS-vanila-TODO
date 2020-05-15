@@ -11,7 +11,22 @@ changeNameBTN.addEventListener('click', changeName)
 function changeName(){
     let newName = prompt('Введите имя')
     user.innerHTML = `Hello, ${newName}`
+    localStorage.setItem('name', newName)
 }
+
+function localStor(){
+    let userName = localStorage.getItem('name')
+    if(userName){
+        user.innerHTML = `Hello, ${userName}`
+    }
+}
+
+localStor()
+
+function clearLocalStor(){
+    localStorage.clear()
+}
+
 
 // Creating and removing TODO items
 btn.addEventListener('click', openModalCreaterTODO)
