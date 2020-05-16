@@ -34,7 +34,7 @@ function localStor(){
         user.innerHTML = "Hello, <span id='nameInput'>write your name</span>"
     }
     if(todoList !== null && todoList.length > 0){
-        todoList.forEach(el => createNewTODOItem(`${el.title}`, `${el.description}`))
+        todoList.forEach(el => createNewTODOItem(`${el.title}`, `${el.description}`, `${el.id}`))
     } else {
         list.innerHTML = '<span class="emptyList"> Here will be your targets </span>'
     }
@@ -80,11 +80,10 @@ function closeModal(){
 
 
 
-function createNewTODOItem(title = 'Title', description = 'Here can be your text'){
+function createNewTODOItem(title = 'Title', description = 'Here can be your text', elementId = Date.now().toString()){
     if(list.firstChild === document.querySelector('.emptyList')){
        list.innerHTML = ''
     }
-    let elementId = Math.random().toString()
     let newItem = document.createElement('div')
     newItem.classList.add('todo__item')
     newItem.innerHTML = `
