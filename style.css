@@ -38,6 +38,9 @@ html{
     padding: 5px;
     border-radius: 5px;
 }
+.todo__description {
+    font-size: 20px;
+}
 .todo__item:nth-child(even) {
     background-color: rgb(206, 206, 206);
 }
