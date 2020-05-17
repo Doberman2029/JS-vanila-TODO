@@ -128,15 +128,13 @@ function checkForEmptyList(){
     }
 }
 
-function deleteThatListItem(element){   
-    console.log(todoArray)
+function deleteThatListItem(element){
     element.target.removeEventListener('click', deleteThatListItem)
     element.target.parentElement.remove()
     let targetId = Object.values(element.target.id).join('')
     let targetIndexInTodoArray = todoArray.findIndex(obj => obj.id === targetId)
     console.log(targetIndexInTodoArray)
     todoArray.splice(targetIndexInTodoArray, 1)
-    console.log(todoArray)
     checkForEmptyList()
 }
 

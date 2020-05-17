@@ -3,6 +3,9 @@ html{
 }
 .name{
     text-align: center;
+    display: block;
+    font-size: 40px;
+    font-weight: bold;
 }
 .todo{
     width: 80%;
