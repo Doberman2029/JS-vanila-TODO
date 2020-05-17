@@ -2,16 +2,20 @@
 let btn = document.querySelector('#addBtn')
 let user = document.querySelector('#userName')
 let list = document.querySelector('#list')
-let html = document.querySelector('html')
-let modal   
+let modal
 let changeNameBTN = document.querySelector('#changeName')
 let logoutBtn = document.querySelector('#logout')
 let todoArray = []
 
-//  Name Changer and actions with Local storage
+
 changeNameBTN.addEventListener('click', changeName)
 logoutBtn.addEventListener('click', clearLocalStor)
 window.addEventListener('beforeunload', addAllTodoToLocalStorage)
+btn.addEventListener('click', openModalCreaterTODO)
+
+
+localStor()
+checkForEmptyList()
 
 
 function changeName(){
@@ -25,7 +29,7 @@ function changeName(){
 
 }
 
-function localStor(){
+function localStor(){  // Check items in local storage
     let userName = localStorage.getItem('name')
     let todoList = JSON.parse(localStorage.getItem('todoList'))
     if(userName){
@@ -40,7 +44,7 @@ function localStor(){
     }
 }
 
-// Check for name and todoItems in local storage
+
 
 function clearLocalStor(){
     localStorage.clear()
@@ -50,7 +54,7 @@ function clearLocalStor(){
 
 
 // Creating and removing TODO items
-btn.addEventListener('click', openModalCreaterTODO)
+
 
 function openModalCreaterTODO(){
     modal = document.createElement('div')
@@ -80,8 +84,11 @@ function closeModal(){
 
 
 
-function createNewTODOItem(title = 'Title', description = 'Here can be your text', elementId = Date.now().toString(), creationDay){
-    if(list.firstChild === document.querySelector('.emptyList')){
+function createNewTODOItem(title = 'Title',
+                        description = 'Here can be your text',
+                        elementId = Date.now().toString(),
+                        creationDay) {
+    if(list.firstChild === document.querySelector('.emptyList')) {
        list.innerHTML = ''
     }
     if(!creationDay){
@@ -133,7 +140,6 @@ function deleteThatListItem(element){
     element.target.parentElement.remove()
     let targetId = Object.values(element.target.id).join('')
     let targetIndexInTodoArray = todoArray.findIndex(obj => obj.id === targetId)
-    console.log(targetIndexInTodoArray)
     todoArray.splice(targetIndexInTodoArray, 1)
     checkForEmptyList()
 }
@@ -143,6 +149,3 @@ function addAllTodoToLocalStorage(){
     let todoList = JSON.stringify(todoArray)
     localStorage.setItem('todoList', todoList)
 }
-
-localStor()
-checkForEmptyList()
