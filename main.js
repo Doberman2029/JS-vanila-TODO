@@ -34,7 +34,7 @@ function localStor(){
         user.innerHTML = "Hello, <span id='nameInput'>write your name</span>"
     }
     if(todoList !== null && todoList.length > 0){
-        todoList.forEach(el => createNewTODOItem(`${el.title}`, `${el.description}`, `${el.id}`))
+        todoList.forEach(el => createNewTODOItem(`${el.title}`, `${el.description}`, `${el.id}`, `${el.creationDay}`))
     } else {
         list.innerHTML = '<span class="emptyList"> Here will be your targets </span>'
     }
@@ -80,17 +80,22 @@ function closeModal(){
 
 
 
-function createNewTODOItem(title = 'Title', description = 'Here can be your text', elementId = Date.now().toString()){
+function createNewTODOItem(title = 'Title', description = 'Here can be your text', elementId = Date.now().toString(), creationDay){
     if(list.firstChild === document.querySelector('.emptyList')){
        list.innerHTML = ''
+    }
+    if(!creationDay){
+        creationDay = new Date().toLocaleString()
     }
     let newItem = document.createElement('div')
     newItem.classList.add('todo__item')
     newItem.innerHTML = `
                 <span class="todo__item-delete" id="${elementId}">&#10006;</span>
-                <div class="todo__title">${title}</div>
+                <div class="todo__title">${title}
+                </div>
                 <hr>
-                <div class="todo__description">${description}</div>
+                <span class="todo__description">${description}</span>
+                <span class="creation-date">${creationDay}</span>
     `
     list.append(newItem)
     let crosses = document.querySelectorAll('.todo__item-delete')
@@ -98,7 +103,8 @@ function createNewTODOItem(title = 'Title', description = 'Here can be your text
     todoArray.push({
         title: `${title}`,
         description: `${description}`,
-        id: `${elementId}`
+        id: `${elementId}`,
+        creationDay: `${creationDay}`
     })
     
 }

@@ -107,3 +107,8 @@ html{
 .logout{
     float: right;
 }
+.creation-date {
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
